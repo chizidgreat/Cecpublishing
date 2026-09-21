@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --color-brand-navy: #0B1325;
+  --color-brand-navy-dark: #070C18;
+  --color-brand-navy-light: #18243D;
+  --color-brand-gold: #D4AF37;
+  --color-brand-gold-light: #F3E5AB;
+  --color-brand-gold-dark: #B58D23;
+  --color-brand-gold-hover: #C59E2D;
+  --color-brand-parchment: #FAF8F5;
+  --color-brand-cream: #F3EFE8;
+  --color-brand-slate: #334155;
+  --color-brand-muted: #64748B;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #111A2E;
+  background-color: #FAF8F5;
+}
+
+.font-display {
+  font-family: var(--font-serif);
+}
+
+/* Custom subtle book spine & foil sheen */
+.book-shadow {
+  box-shadow: 
+    -4px 0 8px -2px rgba(0, 0, 0, 0.12),
+    8px 12px 24px -4px rgba(11, 19, 37, 0.18),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.gold-border-gradient {
+  border-image: linear-gradient(to bottom, #D4AF37, #B58D23, #FAF8F5) 1;
+}
+

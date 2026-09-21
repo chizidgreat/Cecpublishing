@@ -1,0 +1,5 @@
+# Robots.txt for CEC Publishing & Media
+User-agent: *
+Allow: /
+
+Sitemap: https://cecpublishing.com/sitemap.xml
