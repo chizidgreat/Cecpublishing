@@ -11,7 +11,7 @@ export const ContactView: React.FC<ContactViewProps> = ({ onOpenQuote }) => {
     fullName: '',
     email: '',
     phone: '',
-    serviceRequired: 'Editing',
+    serviceRequired: 'Manuscript Editing',
     projectType: 'Book Manuscript (Non-Fiction)',
     estimatedBudget: 'Flexible / Based on Scope',
     message: ''
@@ -22,15 +22,13 @@ export const ContactView: React.FC<ContactViewProps> = ({ onOpenQuote }) => {
 
   const servicesList = [
     'Ghostwriting',
-    'Editing',
+    'Manuscript Editing',
     'Proofreading',
     'Book Formatting',
-    'Cover Design',
+    'Book Cover Design',
     'Ebook Publishing',
     'Print Publishing',
-    'Publishing Consultancy',
-    'Digital Content',
-    'Other'
+    'Publishing Consultancy & ISBN'
   ];
 
   const projectTypes = [

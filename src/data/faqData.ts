@@ -53,7 +53,7 @@ export const FAQ_DATA: FaqItem[] = [
     id: 'publishing-costs',
     question: 'How much does publishing cost?',
     category: 'Costs & Timelines',
-    answer: 'Because every manuscript is unique in word count, complexity, genre, and production requirements, we do not operate on rigid, one-size-fits-all pricing. The cost of your project depends entirely on its scope—such as whether you require proofreading, developmental editing, custom cover art, interior illustrations, or end-to-end publishing management. We encourage you to request a tailored quote or schedule a consultation so we can evaluate your specific needs and provide an honest, transparent estimate.'
+    answer: 'At CEC Publishing & Media, we believe professional publishing services should be both excellent and accessible. We deliver high-quality writing, editing, design and publishing support at competitive, affordable rates, with each project quoted according to its specific requirements. Because every manuscript has a unique page count, editorial depth, genre complexity, and target production format, we provide personalised quotations tailored to your exact needs. Our standard milestone payment terms are 50% payment before commencement and 50% upon completion / before final delivery. Physical print runs are quoted separately based on your preferred trim size, paperweight, binding type, and copy quantity. Contact our desk or submit an enquiry to receive a tailored quotation.'
   },
   {
     id: 'organisations-and-churches',

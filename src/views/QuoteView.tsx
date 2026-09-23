@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { 
-  FileCheck2, 
   Send, 
   UploadCloud, 
   CheckCircle2, 
   Calculator, 
   ShieldCheck, 
   MessageSquare,
-  HelpCircle,
   FileText,
-  X
+  X,
+  Clock,
+  CreditCard,
+  Sparkles
 } from 'lucide-react';
 import { QuoteFormData } from '../types';
-import { SERVICES_DATA } from '../data/servicesData';
+import { SERVICES_DATA, STANDARD_PAYMENT_TERMS } from '../data/servicesData';
 
 interface QuoteViewProps {
   initialServiceId?: string;
@@ -25,11 +26,12 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
     name: '',
     email: '',
     phone: '',
+    projectTitle: '',
     service: defaultService,
     pageCount: '',
     wordCount: '',
     projectDescription: '',
-    deadline: 'Flexible / Standard Timeline (4-8 weeks)',
+    deadline: 'Standard Timeline (4–8 weeks)',
     budgetRange: 'Standard Scope / Awaiting Assessment',
     manuscriptStatus: 'Completed First Draft'
   });
@@ -38,27 +40,21 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [dragActive, setDragActive] = useState(false);
-
-  const budgetOptions = [
-    'Standard Scope / Awaiting Assessment',
-    'Economy / Phased Services',
-    'Comprehensive Full-Service Package',
-    'Executive / Turnkey Production'
-  ];
+  const [formError, setFormError] = useState<string | null>(null);
 
   const deadlineOptions = [
-    'Urgent / Accelerated (Under 4 weeks)',
     'Standard Timeline (4–8 weeks)',
+    'Urgent / Accelerated (Under 4 weeks)',
     'Quarterly Goal (2–4 months)',
     'Flexible / Quality-First'
   ];
 
   const manuscriptStatusOptions = [
+    'Completed First Draft',
+    'Rough Draft (Requires substantive editing)',
     'Concept / Outline Stage (Ghostwriting needed)',
-    'Rough First Draft (Needs substantive editing)',
-    'Polished Draft (Needs line editing & proofreading)',
     'Edited Manuscript (Ready for formatting & cover)',
-    'Corporate / Ministry Project'
+    'Ready for Publishing Consultancy / ISBN'
   ];
 
   const handleFileDrop = (e: React.DragEvent) => {
@@ -77,20 +73,38 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setFormError(null);
+
+    // Ensure form is not submitted empty
+    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim() || !formData.projectDescription.trim()) {
+      setFormError('Please fill in all required fields (Full Name, Email Address, Phone Number, and Project Description).');
+      return;
+    }
+
     setSubmitting(true);
 
     setTimeout(() => {
       setSubmitting(false);
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 650);
+    }, 500);
   };
 
   const generateWhatsAppRelay = () => {
-    const text = encodeURIComponent(
-      `Hello CEC Publishing & Media,\nI have submitted a quote enquiry on your website.\nAuthor Name: ${formData.name || 'N/A'}\nService: ${formData.service}\nStatus: ${formData.manuscriptStatus}\nEstimated Word/Page Count: ${formData.wordCount || formData.pageCount || 'Not specified'}\nPhone: ${formData.phone}`
-    );
-    return `https://wa.me/2347059212780?text=${text}`;
+    const summaryLines = [
+      'Hello CEC Publishing & Media,',
+      'I have submitted a project enquiry via your website form.',
+      `• Full Name: ${formData.name.trim() || 'N/A'}`,
+      `• Email: ${formData.email.trim() || 'N/A'}`,
+      `• Phone Number: ${formData.phone.trim() || 'N/A'}`,
+      formData.projectTitle.trim() ? `• Working Title: ${formData.projectTitle.trim()}` : null,
+      `• Service Required: ${formData.service}`,
+      `• Page / Word Count: ${formData.pageCount.trim() || formData.wordCount.trim() || 'Not specified'}`,
+      `• Preferred Timeline: ${formData.deadline}`,
+      `• Brief Description: ${formData.projectDescription.trim().slice(0, 150)}${formData.projectDescription.length > 150 ? '...' : ''}`
+    ].filter(Boolean).join('\n');
+
+    return `https://wa.me/2347059212780?text=${encodeURIComponent(summaryLines)}`;
   };
 
   return (
@@ -99,13 +113,13 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
       <section className="bg-[#0B1325] text-white py-16 lg:py-20 border-b border-[#D4AF37]/20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#D4AF37]">
-            Project Scope & Estimation
+            Project Consultation & Quotation
           </span>
           <h1 className="font-display text-3xl sm:text-5xl font-bold tracking-tight">
-            Request a Publishing Quote
+            Project Enquiry Form
           </h1>
           <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            Tell us about your manuscript. We review word counts, editorial depth, formatting needs, and distribution options to prepare an itemized proposal.
+            Tell us about your manuscript or publishing goals. Our team will review your specifications, evaluate the scope, and prepare an itemized proposal.
           </p>
         </div>
       </section>
@@ -122,22 +136,29 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#0B1325]">
-                    Project Enquiry Submitted
+                    Project Enquiry Received
                   </h2>
-                  <p className="text-slate-600 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-                    Thank you, <span className="font-semibold text-[#0B1325]">{formData.name}</span>. Our editorial and production desk at CEC Publishing & Media has received your specifications for <span className="font-semibold text-[#0B1325]">{formData.service}</span>.
+                  <p className="text-slate-700 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+                    Thank you, <span className="font-semibold text-[#0B1325]">{formData.name}</span>. Your enquiry for <span className="font-semibold text-[#0B1325]">{formData.service}</span> has been received by our editorial and production desk at CEC Publishing & Media.
                   </p>
-                  <div className="p-4 bg-[#FAF8F5] border border-[#E5DFD5] rounded-xs text-xs text-left max-w-md mx-auto space-y-1.5">
+
+                  <div className="p-4 bg-[#FAF8F5] border border-[#E5DFD5] rounded-xs text-xs text-left max-w-md mx-auto space-y-2">
                     <div className="flex justify-between">
                       <span className="text-slate-500">Service:</span>
                       <span className="font-semibold text-[#0B1325]">{formData.service}</span>
                     </div>
+                    {formData.projectTitle.trim() && (
+                      <div className="flex justify-between">
+                        <span className="text-slate-500">Working Title:</span>
+                        <span className="font-semibold text-[#0B1325]">{formData.projectTitle}</span>
+                      </div>
+                    )}
                     <div className="flex justify-between">
                       <span className="text-slate-500">Estimated Length:</span>
-                      <span className="font-semibold text-[#0B1325]">{formData.wordCount || formData.pageCount || 'Pending draft'}</span>
+                      <span className="font-semibold text-[#0B1325]">{formData.pageCount || formData.wordCount || 'To be determined'}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Deadline:</span>
+                      <span className="text-slate-500">Preferred Timeline:</span>
                       <span className="font-semibold text-[#0B1325]">{formData.deadline}</span>
                     </div>
                     {uploadedFile && (
@@ -148,14 +169,35 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                     )}
                   </div>
 
-                  <p className="text-xs text-slate-500">
-                    We typically respond with initial assessment notes within 24 to 48 business hours.
-                  </p>
+                  {/* Explicit Accurate Confirmation Message per Requirement 5 */}
+                  <div className="p-4 bg-amber-50/60 border border-[#D4AF37]/40 rounded-xs text-xs text-slate-700 max-w-md mx-auto text-left flex items-start gap-2.5">
+                    <Clock className="w-4 h-4 text-[#B58D23] shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="text-[#0B1325] block mb-0.5">Response Timeline Notice</strong>
+                      <span>Our team will review your enquiry in detail and respond with a personalized assessment and proposal within <strong>24–48 business hours</strong>.</span>
+                    </div>
+                  </div>
 
                   <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3">
                     <button
-                      onClick={() => setSubmitted(false)}
-                      className="px-6 py-2.5 bg-[#0B1325] text-white text-xs font-semibold rounded-xs hover:bg-[#16223B]"
+                      onClick={() => {
+                        setSubmitted(false);
+                        setFormData({
+                          name: '',
+                          email: '',
+                          phone: '',
+                          projectTitle: '',
+                          service: defaultService,
+                          pageCount: '',
+                          wordCount: '',
+                          projectDescription: '',
+                          deadline: 'Standard Timeline (4–8 weeks)',
+                          budgetRange: 'Standard Scope / Awaiting Assessment',
+                          manuscriptStatus: 'Completed First Draft'
+                        });
+                        setUploadedFile(null);
+                      }}
+                      className="px-6 py-2.5 bg-[#0B1325] text-white text-xs font-semibold rounded-xs hover:bg-[#16223B] transition-colors cursor-pointer"
                     >
                       Submit Another Project
                     </button>
@@ -163,28 +205,34 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                       href={generateWhatsAppRelay()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-2.5 bg-[#25D366] text-white text-xs font-semibold rounded-xs inline-flex items-center justify-center gap-1.5"
+                      className="px-6 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-semibold rounded-xs inline-flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <MessageSquare className="w-3.5 h-3.5 fill-white" />
-                      <span>Notify CEC on WhatsApp</span>
+                      <span>Follow Up on WhatsApp (07059212780)</span>
                     </a>
                   </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {formError && (
+                    <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xs">
+                      {formError}
+                    </div>
+                  )}
+
                   <div className="border-b border-[#E5DFD5] pb-4">
                     <h3 className="font-display font-bold text-xl text-[#0B1325]">
                       1. Author / Client Information
                     </h3>
                     <p className="text-xs text-slate-500">
-                      Who should we address the proposal and correspondence to?
+                      Please provide your contact details for correspondence and project proposals.
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
-                        Your Full Name *
+                        Full Name *
                       </label>
                       <input
                         id="quote-name"
@@ -192,7 +240,7 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Dr. Ngozi Balogun"
+                        placeholder="e.g. Chinua Achebe"
                         className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#0B1325] rounded-xs focus:outline-none focus:border-[#D4AF37]"
                       />
                     </div>
@@ -207,25 +255,41 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="ngozi@example.com"
+                        placeholder="author@example.com"
                         className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#0B1325] rounded-xs focus:outline-none focus:border-[#D4AF37]"
                       />
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
-                      WhatsApp / Phone Number *
-                    </label>
-                    <input
-                      id="quote-phone"
-                      type="tel"
-                      required
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+234 800 000 0000"
-                      className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#0B1325] rounded-xs focus:outline-none focus:border-[#D4AF37]"
-                    />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
+                        Phone Number *
+                      </label>
+                      <input
+                        id="quote-phone"
+                        type="tel"
+                        required
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="07059212780 or +234..."
+                        className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#0B1325] rounded-xs focus:outline-none focus:border-[#D4AF37]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
+                        Working Title / Project Title (if any)
+                      </label>
+                      <input
+                        id="quote-project-title"
+                        type="text"
+                        value={formData.projectTitle}
+                        onChange={(e) => setFormData({ ...formData, projectTitle: e.target.value })}
+                        placeholder="e.g. Principles of Modern Leadership"
+                        className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#0B1325] rounded-xs focus:outline-none focus:border-[#D4AF37]"
+                      />
+                    </div>
                   </div>
 
                   <div className="border-b border-[#E5DFD5] pt-4 pb-4">
@@ -233,14 +297,14 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                       2. Project Specifications
                     </h3>
                     <p className="text-xs text-slate-500">
-                      Select primary services and manuscript metrics.
+                      Select services required and tell us about your manuscript.
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
-                        Primary Service Required *
+                        Service(s) Required *
                       </label>
                       <select
                         id="quote-service-select"
@@ -278,6 +342,20 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
+                        Estimated Page Count
+                      </label>
+                      <input
+                        id="quote-page-count"
+                        type="text"
+                        value={formData.pageCount}
+                        onChange={(e) => setFormData({ ...formData, pageCount: e.target.value })}
+                        placeholder="e.g. 150 pages"
+                        className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#0B1325] rounded-xs focus:outline-none focus:border-[#D4AF37]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
                         Estimated Word Count (if applicable)
                       </label>
                       <input
@@ -285,67 +363,33 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                         type="text"
                         value={formData.wordCount}
                         onChange={(e) => setFormData({ ...formData, wordCount: e.target.value })}
-                        placeholder="e.g. 45,000 words"
+                        placeholder="e.g. 35,000 words"
                         className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#0B1325] rounded-xs focus:outline-none focus:border-[#D4AF37]"
                       />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
-                        Number of Pages (if formatted / estimated)
-                      </label>
-                      <input
-                        id="quote-page-count"
-                        type="text"
-                        value={formData.pageCount}
-                        onChange={(e) => setFormData({ ...formData, pageCount: e.target.value })}
-                        placeholder="e.g. 180 pages"
-                        className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#0B1325] rounded-xs focus:outline-none focus:border-[#D4AF37]"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
-                        Desired Target Deadline
-                      </label>
-                      <select
-                        id="quote-deadline"
-                        value={formData.deadline}
-                        onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-                        className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#0B1325] rounded-xs focus:outline-none focus:border-[#D4AF37]"
-                      >
-                        {deadlineOptions.map((opt) => (
-                          <option key={opt} value={opt}>
-                            {opt}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
-                        Budget Framework
-                      </label>
-                      <select
-                        id="quote-budget-range"
-                        value={formData.budgetRange}
-                        onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                        className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#0B1325] rounded-xs focus:outline-none focus:border-[#D4AF37]"
-                      >
-                        {budgetOptions.map((b) => (
-                          <option key={b} value={b}>
-                            {b}
-                          </option>
-                        ))}
-                      </select>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
-                      Project Description & Special Objectives *
+                      Preferred Timeline / Deadline
+                    </label>
+                    <select
+                      id="quote-deadline"
+                      value={formData.deadline}
+                      onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
+                      className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#0B1325] rounded-xs focus:outline-none focus:border-[#D4AF37]"
+                    >
+                      {deadlineOptions.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
+                      Brief Project Description *
                     </label>
                     <textarea
                       id="quote-project-description"
@@ -353,15 +397,15 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                       rows={4}
                       value={formData.projectDescription}
                       onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })}
-                      placeholder="Outline your book's topic, target audience, preferred publishing formats (Paperback, Hardcover, Kindle EPUB), or any specific concerns..."
+                      placeholder="Outline your book's topic, target audience, specific editorial concerns, and expected delivery format..."
                       className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#0B1325] rounded-xs focus:outline-none focus:border-[#D4AF37]"
                     />
                   </div>
 
-                  {/* Manuscript Sample Upload (Drag & Drop + Manual Click per Guidelines) */}
+                  {/* Manuscript Sample Upload (Drag & Drop + Manual Click) */}
                   <div>
                     <label className="block text-xs font-semibold text-[#0B1325] mb-1.5">
-                      Upload Manuscript Sample / Table of Contents (Optional)
+                      Upload Manuscript Sample / Outline (Optional)
                     </label>
                     <div
                       onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
@@ -398,7 +442,7 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                               Click to select or drag & drop file here
                             </span>
                             <span className="text-[11px] text-slate-500 block mt-1">
-                              Word (.docx), PDF, or RTF sample (Max 25MB). Confidential.
+                              Word (.docx), PDF, or RTF sample (Max 25MB). Strictly confidential.
                             </span>
                           </div>
                         )}
@@ -412,7 +456,7 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                       id="quote-submit-enquiry-btn"
                       type="submit"
                       disabled={submitting}
-                      className="w-full py-3.5 bg-gradient-to-r from-[#D4AF37] to-[#B58D23] text-[#0B1325] font-bold text-sm sm:text-base rounded-xs shadow-md hover:from-[#E5C365] hover:to-[#C59E2D] transition-all flex items-center justify-center gap-2"
+                      className="w-full py-3.5 bg-gradient-to-r from-[#D4AF37] to-[#B58D23] text-[#0B1325] font-bold text-sm sm:text-base rounded-xs shadow-md hover:from-[#E5C365] hover:to-[#C59E2D] transition-all flex items-center justify-center gap-2 cursor-pointer"
                     >
                       {submitting ? (
                         <span>Processing Project Details...</span>
@@ -423,8 +467,8 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                         </>
                       )}
                     </button>
-                    <p className="text-center text-[11px] text-slate-400 mt-2">
-                      CEC Publishing & Media respects your intellectual property. All submissions are treated with strict confidentiality.
+                    <p className="text-center text-[11px] text-slate-500 mt-2">
+                      Submissions receive a manual assessment and proposal from our editorial desk within 24–48 business hours.
                     </p>
                   </div>
                 </form>
@@ -434,6 +478,39 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
 
           {/* Right Sidebar: Transparent Pricing Principles & Support */}
           <div className="lg:col-span-4 space-y-6">
+            {/* Value-Focused Pricing Message */}
+            <div className="bg-[#FAF8F5] p-6 rounded-xs border border-[#D4AF37] shadow-xs space-y-3">
+              <div className="flex items-center gap-2 text-[#B58D23]">
+                <Sparkles className="w-4 h-4" />
+                <h4 className="font-display font-bold text-sm text-[#0B1325]">
+                  Exceptional Quality. Accessible Pricing.
+                </h4>
+              </div>
+              <p className="text-xs text-slate-700 leading-relaxed">
+                At CEC Publishing & Media, we believe professional publishing services should be both excellent and accessible. We deliver high-quality writing, editing, design and publishing support at competitive, affordable rates, with each project quoted according to its specific requirements.
+              </p>
+              <div className="pt-2 border-t border-[#E5DFD5] text-[11px] text-slate-600">
+                Tell us about your project and we’ll provide a personalised quotation based on your specific needs.
+              </div>
+            </div>
+
+            {/* Payment terms */}
+            <div className="bg-white p-5 rounded-xs border border-[#E5DFD5] shadow-xs space-y-2">
+              <div className="flex items-center gap-2 text-[#0B1325]">
+                <CreditCard className="w-4 h-4 text-[#B58D23]" />
+                <h4 className="font-display font-bold text-sm text-[#0B1325]">
+                  Payment Terms
+                </h4>
+              </div>
+              <p className="text-xs text-slate-700 leading-relaxed font-medium">
+                {STANDARD_PAYMENT_TERMS}
+              </p>
+              <p className="text-[11px] text-slate-500 pt-1">
+                Print publishing is quoted separately according to current printing and material costs.
+              </p>
+            </div>
+
+            {/* How Quotes Are Determined */}
             <div className="bg-white p-6 rounded-xs border border-[#E5DFD5] shadow-xs space-y-4">
               <div className="flex items-center gap-2 text-[#B58D23]">
                 <Calculator className="w-5 h-5" />
@@ -442,29 +519,26 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                 </h4>
               </div>
               <p className="text-xs text-slate-600 leading-relaxed">
-                At CEC Publishing & Media, we never use arbitrary flat fees that disadvantage authors. Your quote is tailored according to transparent factors:
+                At CEC Publishing & Media, we never use arbitrary flat fees. Your quote is tailored according to transparent factors:
               </p>
               
               <ul className="space-y-2.5 text-xs text-slate-700 pt-2 border-t border-[#E5DFD5]">
                 <li className="flex items-start gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] mt-1.5 shrink-0" />
-                  <span><strong>Word Count & Length:</strong> Direct volume of text requiring proofing or typesetting.</span>
+                  <span><strong>Page & Word Count:</strong> Direct volume of text requiring editing, proofing, or typesetting.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] mt-1.5 shrink-0" />
-                  <span><strong>Editorial Depth:</strong> Basic proofreading vs. comprehensive developmental rewriting.</span>
+                  <span><strong>Editorial Depth:</strong> Proofreading vs. structural and developmental editing.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] mt-1.5 shrink-0" />
-                  <span><strong>Interior Complexity:</strong> Plain fiction text vs. indexed academic textbooks, charts, and tables.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] mt-1.5 shrink-0" />
-                  <span><strong>Binding & Print Specifications:</strong> Paperback vs. foil-stamped hardcover runs.</span>
+                  <span><strong>Production Scope:</strong> Standard trade paperbacks vs. multi-edition hardcover and ebook formats.</span>
                 </li>
               </ul>
             </div>
 
+            {/* Author Guarantee */}
             <div className="bg-[#0B1325] text-white p-6 rounded-xs border border-[#D4AF37]/30 space-y-3">
               <div className="flex items-center gap-2 text-[#D4AF37]">
                 <ShieldCheck className="w-5 h-5" />
@@ -477,9 +551,10 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
               </p>
             </div>
 
+            {/* Direct Contact Card */}
             <div className="bg-white p-6 rounded-xs border border-[#E5DFD5] text-xs space-y-2 text-slate-600">
               <span className="font-semibold text-[#0B1325] block text-sm">Prefer to Speak First?</span>
-              <p>Reach out directly to our publishing team in Enugu:</p>
+              <p>Reach out directly to our publishing team in Enugu, Nigeria:</p>
               <div className="pt-2 space-y-2 text-xs">
                 <div className="flex items-center justify-between">
                   <span className="font-semibold text-[#0B1325]">Email:</span>
@@ -495,7 +570,12 @@ export const QuoteView: React.FC<QuoteViewProps> = ({ initialServiceId }) => {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="font-semibold text-[#0B1325]">WhatsApp:</span>
-                  <a href="https://wa.me/2347059212780" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-mono font-medium">
+                  <a 
+                    href="https://wa.me/2347059212780?text=Hello%20CEC%20Publishing%20%26%20Media,%20I%20would%20like%20to%20enquire%20about%20your%20publishing%20services." 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-[#25D366] hover:underline font-mono font-medium"
+                  >
                     07059212780
                   </a>
                 </div>

@@ -11,7 +11,6 @@ import {
   Building2, 
   Calendar, 
   MapPin, 
-  Award,
   ArrowRight,
   Info
 } from 'lucide-react';

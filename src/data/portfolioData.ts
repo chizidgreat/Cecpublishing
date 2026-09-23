@@ -3,98 +3,113 @@ import { PortfolioBook } from '../types';
 /**
  * PORTFOLIO CATALOG
  * 
- * NOTE FOR CEC PUBLISHING & MEDIA:
- * These items represent sample project placeholders demonstrating layout,
- * typography, and service classification. As real titles are published,
- * simply replace or add new book objects to this array.
+ * Six actual book covers:
+ * - Four books authored by Chizi Ezugwu
+ * - Two selected client works completed for clients by CEC Publishing & Media
+ * 
+ * Categories:
+ * - "Books by Chizi Ezugwu"
+ * - "Selected Client Works"
  */
 export const PORTFOLIO_BOOKS: PortfolioBook[] = [
+  // 1. Books by Chizi Ezugwu (First Four)
   {
-    id: 'sample-project-01',
-    title: 'Echoes of the Niger',
-    author: '[Sample Author: Dr. E. Okafor]',
-    category: 'Non-Fiction',
-    services: ['Developmental Editing', 'Interior Formatting', 'Print Production'],
-    description: 'A socio-historical inquiry examining cultural evolution and community resilience in southeastern Nigeria.',
-    format: 'Hardcover & Paperback',
-    trimSize: '6" x 9"',
-    isSamplePlaceholder: true,
-    coverAccent: '#16223B',
-    coverPattern: 'geometric'
+    id: 'my-book-01',
+    title: 'Half-Baked Bread',
+    author: 'Chizi Ezugwu',
+    workType: 'my-book',
+    category: 'Books by Chizi Ezugwu',
+    services: ['Authored Work', 'Publishing & Editorial Direction', 'Book Formatting', 'Cover Design'],
+    description: 'The “Developing Nation” status permanently tagged on Africa by the big brother, Europe seems to be the result of her woes; a vicious circle... just like Helen’s big sister role to Kachi in “Half-Baked Bread”. A celebrated work by Chizi Ezugwu exploring self-determination and African socioeconomic reality.',
+    format: 'Print & Digital Editions',
+    trimSize: '5.5" x 8.5" Trade Paperback',
+    isSamplePlaceholder: false,
+    coverAccent: '#A8381D',
+    coverPattern: 'geometric',
+    coverImage: '/images/books/my-book-01.jpg'
   },
   {
-    id: 'sample-project-02',
-    title: 'The Purpose-Driven Leader',
-    author: '[Sample Author: Pastor M. Adeleke]',
-    category: 'Faith & Ministry',
-    services: ['Ghostwriting Collaboration', 'Cover Design', 'Ebook & Print Publishing'],
-    description: 'A 12-chapter leadership handbook designed for church executives, ministry stewards, and marketplace leaders.',
-    format: 'Paperback & Kindle Ebook',
-    trimSize: '5.5" x 8.5"',
-    isSamplePlaceholder: true,
+    id: 'my-book-02',
+    title: 'Licensed Crime',
+    author: 'Chizi Ezugwu',
+    workType: 'my-book',
+    category: 'Books by Chizi Ezugwu',
+    services: ['Authored Work', 'Publishing & Editorial Direction', 'Book Formatting', 'Cover Design'],
+    description: 'A novel by Chizi Ezugwu.',
+    format: 'Print & Digital Editions',
+    trimSize: 'Standard Trade',
+    isSamplePlaceholder: false,
     coverAccent: '#1A365D',
-    coverPattern: 'sunburst'
+    coverPattern: 'sunburst',
+    coverImage: '/images/books/my-book-02.jpg'
   },
   {
-    id: 'sample-project-03',
-    title: 'Scaling African Enterprises',
-    author: '[Sample Author: K. C. Nwankwo, MBA]',
-    category: 'Business & Leadership',
-    services: ['Manuscript Editing', 'Cover Design', 'Typesetting', 'ISBN Registration'],
-    description: 'Strategic frameworks and operating principles for small-to-medium scale founders navigating emerging markets.',
-    format: 'Paperback & Global POD',
-    trimSize: '6" x 9"',
-    isSamplePlaceholder: true,
+    id: 'my-book-03',
+    title: 'Can I Still Become a Successful Artist?',
+    author: 'Chizi Ezugwu',
+    workType: 'my-book',
+    category: 'Books by Chizi Ezugwu',
+    services: ['Authored Work', 'Publishing & Editorial Direction', 'Book Formatting', 'Cover Design'],
+    description: 'The Practical Blueprint for Building an Independent Music Career in 2026 and Beyond.',
+    format: 'Print & Digital Editions',
+    trimSize: 'Standard Trade',
+    isSamplePlaceholder: false,
     coverAccent: '#1E293B',
-    coverPattern: 'diagonal'
+    coverPattern: 'diagonal',
+    coverImage: '/images/books/my-book-03.jpg'
   },
   {
-    id: 'sample-project-04',
-    title: 'When Dust Whispers',
-    author: '[Sample Author: Chidera V. Eze]',
-    category: 'Fiction',
-    services: ['Proofreading', 'Interior Typesetting', 'Cover Design'],
-    description: 'A literary novel exploring diaspora return, generational ties, and reconciliation in modern Enugu.',
-    format: 'Paperback & Ebook',
-    trimSize: '5" x 8"',
-    isSamplePlaceholder: true,
+    id: 'my-book-04',
+    title: 'The Money You Are Not Seeing',
+    author: 'Chizi Ezugwu',
+    workType: 'my-book',
+    category: 'Books by Chizi Ezugwu',
+    services: ['Authored Work', 'Publishing & Editorial Direction', 'Book Formatting', 'Cover Design'],
+    description: 'Making massive money from what you know. Opportunities are everywhere. Wealth belongs to those who can see them — see opportunities, create value, build wealth, and leave a legacy.',
+    format: 'Print & Digital Editions',
+    trimSize: 'Standard Trade',
+    isSamplePlaceholder: false,
     coverAccent: '#2D1B36',
-    coverPattern: 'curved'
+    coverPattern: 'classic',
+    coverImage: '/images/books/my-book-04.jpg'
   },
+
+  // 2. Selected Client Works (Final Two - Completed for clients by CEC Publishing & Media)
   {
-    id: 'sample-project-05',
-    title: 'Pedagogy in Transition',
-    author: '[Sample Author: Prof. A. I. Nnamani]',
-    category: 'Academic',
-    services: ['Copyediting', 'Indexing', 'Typesetting', 'Print Management'],
-    description: 'Comprehensive academic textbook on curriculum redesign and instructional technologies in higher education.',
-    format: 'Clothbound Hardcover & Digital PDF',
-    trimSize: '7" x 10"',
-    isSamplePlaceholder: true,
+    id: 'client-work-01',
+    title: 'Pecksniffian: A Practical Guide to Authentic Living in a World of Appearance',
+    author: 'Evang. Kelvin Dike',
+    workType: 'client-work',
+    category: 'Selected Client Works',
+    services: ['Publishing Support', 'Book Formatting', 'Cover Design'],
+    description: 'A Practical Guide to Authentic Living in a World of Appearance — The Danger of a Fake Life and the Beauty of True Character. Completed for client by CEC Publishing & Media.',
+    format: 'Commissioned Publication',
+    trimSize: 'Standard Trade',
+    isSamplePlaceholder: false,
     coverAccent: '#0F2C2C',
-    coverPattern: 'classic'
+    coverPattern: 'vintage',
+    coverImage: '/images/books/client-work-01.jpg'
   },
   {
-    id: 'sample-project-06',
-    title: 'Footprints Across Coal City',
-    author: '[Sample Author: Elder B. U. Okoli]',
-    category: 'Memoir',
-    services: ['Ghostwriting', 'Photo Archiving', 'Custom Cover', 'Limited Hardcover Run'],
-    description: 'A personal memoir reflecting on five decades of civic duty, mining heritage, and family life in Enugu.',
-    format: 'Commemorative Hardcover',
-    trimSize: '6" x 9"',
-    isSamplePlaceholder: true,
+    id: 'client-work-02',
+    title: 'Anneal: The Act of Becoming Stronger Through Pressure',
+    author: 'Betsy Mbrukem',
+    workType: 'client-work',
+    category: 'Selected Client Works',
+    services: ['Publishing Support', 'Editorial Direction', 'Book Formatting', 'Cover Design'],
+    description: 'Structure, not pressure. Integrity, not hype. ANNEAL is a journey of healing, growth and becoming a stronger you. It explores how pressure, pain, difficulty and seasons of change can become part of a process that builds character, clarity and purpose. Completed for client by CEC Publishing & Media.',
+    format: 'Commissioned Publication',
+    trimSize: 'Standard Trade',
+    isSamplePlaceholder: false,
     coverAccent: '#2C1D11',
-    coverPattern: 'vintage'
+    coverPattern: 'curved',
+    coverImage: '/images/books/client-work-02.jpg',
+    objectPosition: 'left center'
   }
 ];
 
 export const PORTFOLIO_CATEGORIES = [
   'All',
-  'Non-Fiction',
-  'Faith & Ministry',
-  'Business & Leadership',
-  'Fiction',
-  'Academic',
-  'Memoir'
+  'Books by Chizi Ezugwu',
+  'Selected Client Works'
 ] as const;

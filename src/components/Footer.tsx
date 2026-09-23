@@ -285,19 +285,39 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage, onOpenQuote }) =>
         </div>
 
         {/* Bottom Note & Copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-300">
-          <p>© {new Date().getFullYear()} CEC Publishing & Media. All rights reserved.</p>
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-            <span>Enugu, Nigeria</span>
-            <span>•</span>
-            <button 
-              onClick={() => navigateTo('verification')}
-              className="hover:text-[#D4AF37] transition-colors inline-flex items-center gap-1 font-mono"
-            >
-              <span>RC 9874710 (Active)</span>
-            </button>
-            <span>•</span>
-            <span>Publishing with African Identity & Global Excellence</span>
+        <div className="pt-8 space-y-4 text-xs text-slate-300">
+          <div className="p-4 bg-white/5 border border-white/10 rounded-xs flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
+            <div>
+              <span className="font-semibold text-white block text-sm mb-0.5">Author Intellectual Property Guarantee</span>
+              <p className="text-slate-400 text-xs">Authors retain 100% ownership of their copyrights, distribution royalties, manuscripts, and creative control. CEC Publishing & Media operates exclusively as your professional production and editorial partner.</p>
+            </div>
+            <div className="shrink-0 flex items-center gap-2">
+              <span className="font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/40 px-2.5 py-1 rounded-xs text-[11px]">
+                CAC: RC 9874710 (Active)
+              </span>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 pt-2">
+            <p>© {new Date().getFullYear()} CEC Publishing & Media. Registered in Nigeria.</p>
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-5 text-[11px]">
+              <span>Enugu, Nigeria</span>
+              <span>•</span>
+              <a href="mailto:cecpublishingandmedia@gmail.com" className="hover:text-[#D4AF37] transition-colors">
+                cecpublishingandmedia@gmail.com
+              </a>
+              <span>•</span>
+              <a href="tel:+2347059212780" className="hover:text-[#D4AF37] transition-colors font-mono">
+                07059212780
+              </a>
+              <span>•</span>
+              <button 
+                onClick={() => navigateTo('verification')}
+                className="hover:text-[#D4AF37] transition-colors inline-flex items-center gap-1 font-mono text-[#D4AF37]"
+              >
+                <span>CAC RC 9874710 (Active)</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

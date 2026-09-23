@@ -14,7 +14,6 @@ import {
   Layers, 
   Users, 
   Clock, 
-  Award,
   ChevronRight,
   ExternalLink,
   Eye,
@@ -64,8 +63,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <div className="lg:col-span-7 space-y-6 text-left">
               {/* Refined Identity Chip */}
               <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-xs bg-[#16223B] border border-[#D4AF37]/30 text-xs text-[#D4AF37] font-medium tracking-wide">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-                <span>CEC Publishing & Media • Enugu, Nigeria</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span>RC 9874710 (Active)</span>
               </div>
 
               {/* Animated Write-Forward Headline */}
@@ -73,7 +72,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               {/* Supporting Text */}
               <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-normal">
-                CEC Publishing & Media provides professional publishing, editing, ghostwriting, book production and creative services for authors, organisations and individuals ready to turn their ideas into professionally produced works.
+                CEC Publishing & Media is a publishing and creative services company dedicated to helping authors, organisations and individuals transform ideas and manuscripts into professionally developed books and creative content.
               </p>
 
               {/* Value Highlights */}
@@ -146,7 +145,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   />
                   <div className="mt-4 text-center">
                     <span className="inline-block text-[11px] font-mono uppercase tracking-widest text-[#D4AF37] bg-[#16223B] px-3 py-1 border border-[#D4AF37]/30 rounded-xs">
-                      Publishing Showcase [Sample]
+                      Featured Work: Half-Baked Bread
                     </span>
                   </div>
                 </div>
@@ -241,7 +240,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               onClick={() => setActivePage('services')}
               className="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm font-semibold text-[#0B1325] hover:text-[#B58D23] transition-colors group cursor-pointer"
             >
-              <span>View All 12 Services</span>
+              <span>View All 8 Services</span>
               <ArrowRight className="w-4 h-4 text-[#D4AF37] group-hover:translate-x-1 transition-transform duration-200" />
             </button>
           </div>
@@ -293,9 +292,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <div className="mt-10 text-center">
             <button
               onClick={() => setActivePage('services')}
-              className="px-6 py-3 bg-[#0B1325] hover:bg-[#16223B] text-white text-sm font-semibold rounded-xs transition-colors inline-flex items-center gap-2"
+              className="px-6 py-3 bg-[#0B1325] hover:bg-[#16223B] text-white text-sm font-semibold rounded-xs transition-colors inline-flex items-center gap-2 cursor-pointer"
             >
-              <span>Explore All 12 Publishing & Creative Services</span>
+              <span>Explore All 8 Publishing & Creative Services</span>
               <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
             </button>
           </div>
@@ -367,7 +366,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             {/* Pillar 5 */}
             <div className="p-6 bg-[#111A2E] border border-white/10 rounded-xs hover:border-[#D4AF37]/50 transition-colors">
               <div className="w-10 h-10 rounded-xs bg-[#16223B] border border-[#D4AF37]/30 text-[#D4AF37] flex items-center justify-center mb-4">
-                <Award className="w-5 h-5" />
+                <CheckCircle2 className="w-5 h-5" />
               </div>
               <h3 className="font-display font-bold text-lg text-white mb-2">Quality Production</h3>
               <p className="text-sm text-slate-300 leading-relaxed">
@@ -637,22 +636,22 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 Library & Showcase
               </span>
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#0B1325] mt-1">
-                Featured Work & Completed Projects
+                Featured Book Titles & Client Works
               </h2>
               <p className="text-sm text-slate-600 mt-2 max-w-xl">
-                Representative project formats and design specifications. All catalog items feature sample placeholders until client releases are confirmed.
+                Explore books authored by Chizi Ezugwu alongside selected client publications completed by CEC Publishing & Media.
               </p>
             </div>
             <button
               onClick={() => setActivePage('portfolio')}
-              className="mt-4 md:mt-0 text-sm font-semibold text-[#0B1325] hover:text-[#B58D23] inline-flex items-center gap-1.5"
+              className="mt-4 md:mt-0 text-sm font-semibold text-[#0B1325] hover:text-[#B58D23] inline-flex items-center gap-1.5 cursor-pointer"
             >
               <span>Explore Complete Portfolio</span>
               <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
             </button>
           </div>
 
-          {/* 3 Featured Books */}
+          {/* Featured Books Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredBooks.map((book) => (
               <div 
@@ -672,13 +671,19 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 </div>
 
                 <div className="w-full pt-4 border-t border-[#E5DFD5] space-y-2">
-                  <span className="text-[10px] uppercase tracking-wider font-semibold text-[#B58D23]">
-                    {book.category} • [Sample Project]
+                  <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs inline-block ${
+                    book.workType === 'my-book'
+                      ? 'text-[#B58D23] bg-[#FAF8F5] border border-[#D4AF37]/40'
+                      : 'text-slate-700 bg-slate-100 border border-slate-300'
+                  }`}>
+                    {book.workType === 'my-book' ? 'Books by Chizi Ezugwu' : 'Selected Client Works'}
                   </span>
                   <h3 className="font-display font-bold text-lg text-[#0B1325] group-hover:text-[#B58D23] transition-colors duration-200">
                     {book.title}
                   </h3>
-                  <p className="text-xs text-slate-500">{book.author}</p>
+                  <p className="text-xs text-slate-600 font-medium">
+                    {book.workType === 'my-book' ? `Author: ${book.author}` : `Author: ${book.author} (Completed for client)`}
+                  </p>
                   
                   <div className="pt-2 flex flex-wrap justify-center gap-1">
                     {book.services.map((s, idx) => (

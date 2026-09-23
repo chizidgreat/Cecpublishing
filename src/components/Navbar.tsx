@@ -46,10 +46,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               title="View Business Trust & Verification Details"
             >
               <span>RC 9874710 (Active)</span>
-              <span className="text-slate-500">•</span>
-              <span>Enugu, Nigeria</span>
-              <span className="text-slate-500">•</span>
-              <span className="hidden sm:inline">Serving authors nationwide & internationally</span>
             </button>
           </span>
           <div className="hidden sm:flex items-center gap-4 text-slate-300">

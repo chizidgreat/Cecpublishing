@@ -14,18 +14,20 @@ export interface ServiceItem {
   id: string;
   title: string;
   shortDesc: string;
-  category: 'Editorial' | 'Design & Production' | 'Publishing & Strategy' | 'Media & Content';
+  category: 'Editorial' | 'Design & Production' | 'Publishing & Strategy';
   fullDesc: string;
   deliverables: string[];
   idealFor: string;
   iconName: string;
+  quoteModel?: string;
 }
 
 export interface PortfolioBook {
   id: string;
   title: string;
   author: string;
-  category: 'Non-Fiction' | 'Faith & Ministry' | 'Business & Leadership' | 'Fiction' | 'Academic' | 'Memoir';
+  workType: 'my-book' | 'client-work';
+  category: 'Books by Chizi Ezugwu' | 'Selected Client Works' | string;
   services: string[];
   description: string;
   format: string;
@@ -33,6 +35,8 @@ export interface PortfolioBook {
   isSamplePlaceholder: boolean;
   coverAccent: string;
   coverPattern?: string;
+  coverImage?: string;
+  objectPosition?: string;
 }
 
 export interface FaqItem {
@@ -56,6 +60,7 @@ export interface QuoteFormData {
   name: string;
   email: string;
   phone: string;
+  projectTitle: string;
   service: string;
   pageCount: string;
   wordCount: string;

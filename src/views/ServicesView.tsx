@@ -7,17 +7,16 @@ import {
   Palette, 
   Smartphone, 
   BookOpen, 
-  PackageCheck, 
   Compass, 
-  QrCode, 
-  Sparkles, 
-  Bookmark, 
   ArrowRight, 
   Check, 
-  Users 
+  Users,
+  Sparkles,
+  CreditCard,
+  Layers,
+  FileCheck2
 } from 'lucide-react';
-import { SERVICES_DATA } from '../data/servicesData';
-import { ServiceItem } from '../types';
+import { SERVICES_DATA, VALUE_PRICING_MESSAGE, STANDARD_PAYMENT_TERMS } from '../data/servicesData';
 
 interface ServicesViewProps {
   onSelectServiceForQuote: (serviceId: string) => void;
@@ -30,8 +29,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onSelectServiceForQu
     'All',
     'Editorial',
     'Design & Production',
-    'Publishing & Strategy',
-    'Media & Content'
+    'Publishing & Strategy'
   ];
 
   const filteredServices = activeCategory === 'All' 
@@ -47,11 +45,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onSelectServiceForQu
       case 'Palette': return <Palette className="w-5 h-5" />;
       case 'Smartphone': return <Smartphone className="w-5 h-5" />;
       case 'BookOpen': return <BookOpen className="w-5 h-5" />;
-      case 'PackageCheck': return <PackageCheck className="w-5 h-5" />;
       case 'Compass': return <Compass className="w-5 h-5" />;
-      case 'QrCode': return <QrCode className="w-5 h-5" />;
-      case 'Sparkles': return <Sparkles className="w-5 h-5" />;
-      case 'Bookmark': return <Bookmark className="w-5 h-5" />;
       default: return <BookOpen className="w-5 h-5" />;
     }
   };
@@ -62,7 +56,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onSelectServiceForQu
       <section className="bg-[#0B1325] text-white py-16 lg:py-24 border-b border-[#D4AF37]/20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#D4AF37]">
-            Professional Capabilities
+            Professional Capabilities & Tailored Quotations
           </span>
           <h1 className="font-display text-3xl sm:text-5xl font-bold tracking-tight">
             Publishing, Editorial & Creative Services
@@ -77,7 +71,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onSelectServiceForQu
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-xs text-xs font-semibold transition-all duration-200 active:scale-95 ${
+                className={`px-4 py-2 rounded-xs text-xs font-semibold transition-all duration-200 active:scale-95 cursor-pointer ${
                   activeCategory === cat
                     ? 'bg-[#D4AF37] text-[#0B1325] shadow-xs'
                     : 'bg-[#16223B] text-slate-300 hover:text-white hover:border-[#D4AF37]/50 border border-white/10 hover:bg-[#1C2C4C]'
@@ -86,6 +80,80 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onSelectServiceForQu
                 {cat}
               </button>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* VALUE-FOCUSED PRICING SECTION */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+        <div className="bg-white rounded-xs border border-[#D4AF37] shadow-xl p-6 sm:p-10">
+          <div className="max-w-3xl mx-auto text-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-[#FAF8F5] border border-[#D4AF37]/50 text-[#B58D23] text-xs font-bold uppercase tracking-wider rounded-xs">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Bespoke & Accessible Publishing</span>
+            </div>
+            
+            <h2 className="font-display text-2xl sm:text-4xl font-bold text-[#0B1325]">
+              {VALUE_PRICING_MESSAGE.headline}
+            </h2>
+            
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+              {VALUE_PRICING_MESSAGE.body}
+            </p>
+
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <button
+                id="services-request-quote-cta"
+                onClick={() => onSelectServiceForQuote('manuscript-editing')}
+                className="w-full sm:w-auto px-8 py-3.5 bg-[#0B1325] hover:bg-[#16223B] text-[#D4AF37] hover:text-white text-xs font-bold uppercase tracking-wider rounded-xs transition-all duration-200 shadow-md border border-[#D4AF37] flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+              >
+                <span>{VALUE_PRICING_MESSAGE.ctaText}</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+            
+            <p className="text-xs text-slate-500 italic pt-1">
+              {VALUE_PRICING_MESSAGE.ctaSupportingText}
+            </p>
+          </div>
+
+          {/* Value Pillars Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 pt-8 border-t border-[#E5DFD5]">
+            <div className="bg-[#FAF8F5] p-5 rounded-xs border border-[#E5DFD5] space-y-2">
+              <div className="flex items-center gap-2 text-[#B58D23]">
+                <Layers className="w-4 h-4" />
+                <h3 className="font-display font-bold text-sm text-[#0B1325]">
+                  Tailored to Project Scope
+                </h3>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Quotations are calculated according to your manuscript’s specific length, editorial depth, genre requirements, and final publication format.
+              </p>
+            </div>
+
+            <div className="bg-[#FAF8F5] p-5 rounded-xs border border-[#E5DFD5] space-y-2">
+              <div className="flex items-center gap-2 text-[#B58D23]">
+                <FileCheck2 className="w-4 h-4" />
+                <h3 className="font-display font-bold text-sm text-[#0B1325]">
+                  Competitive & Affordable
+                </h3>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                High-standard publishing craftsmanship structured at accessible, realistic rates for authors, independent creators, ministers, and organisations.
+              </p>
+            </div>
+
+            <div className="bg-[#FAF8F5] p-5 rounded-xs border border-[#E5DFD5] space-y-2">
+              <div className="flex items-center gap-2 text-[#B58D23]">
+                <CreditCard className="w-4 h-4" />
+                <h3 className="font-display font-bold text-sm text-[#0B1325]">
+                  Transparent Milestones
+                </h3>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                {STANDARD_PAYMENT_TERMS} Print runs are quoted separately based on exact print specifications.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -108,9 +176,16 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onSelectServiceForQu
                   <div className="w-10 h-10 rounded-xs bg-[#0B1325] text-[#D4AF37] flex items-center justify-center group-hover:scale-105 group-hover:bg-[#16223B] group-hover:shadow-xs transition-all duration-300">
                     {renderIcon(service.iconName)}
                   </div>
-                  <span className="text-[11px] font-mono tracking-wider uppercase text-[#B58D23] font-semibold bg-[#FAF8F5] group-hover:border-[#D4AF37]/40 px-2.5 py-1 border border-[#E5DFD5] rounded-xs transition-colors duration-200">
-                    {service.category}
-                  </span>
+                  <div className="text-right">
+                    <span className="text-[11px] font-mono tracking-wider uppercase text-[#B58D23] font-semibold bg-[#FAF8F5] group-hover:border-[#D4AF37]/40 px-2.5 py-1 border border-[#E5DFD5] rounded-xs transition-colors duration-200">
+                      {service.category}
+                    </span>
+                    {service.quoteModel && (
+                      <div className="text-[11px] font-semibold text-slate-500 mt-1">
+                        {service.quoteModel}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <h3 className="font-display text-2xl font-bold text-[#0B1325] group-hover:text-[#B58D23] transition-colors duration-200 mb-2">
@@ -121,7 +196,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onSelectServiceForQu
                   {service.shortDesc}
                 </p>
 
-                <p className="text-xs text-slate-600 leading-relaxed mb-6">
+                <p className="text-xs text-slate-600 leading-relaxed mb-4">
                   {service.fullDesc}
                 </p>
 
@@ -155,7 +230,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onSelectServiceForQu
               {/* Action Button */}
               <div className="pt-4 border-t border-[#E5DFD5] flex items-center justify-between">
                 <span className="text-[11px] text-slate-400 font-mono">
-                  Enugu, Nigeria & Worldwide
+                  Enugu, Nigeria & Nationwide
                 </span>
                 <button
                   id={`quote-btn-${service.id}`}
@@ -175,13 +250,13 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onSelectServiceForQu
       <section className="max-w-4xl mx-auto px-4 mt-16 text-center bg-[#16223B] text-white p-8 rounded-xs border border-[#D4AF37]/30">
         <h3 className="font-display font-bold text-xl mb-2">Unsure Which Services Your Manuscript Needs?</h3>
         <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto mb-6 leading-relaxed">
-          Submit your raw draft or project summary. Our editorial desk will evaluate your manuscript and recommend an exact, tailored scope.
+          Submit your project details or sample pages. Our editorial desk will evaluate your requirements and provide a tailored quotation.
         </p>
         <button
-          onClick={() => onSelectServiceForQuote('manuscript-assessment')}
-          className="px-6 py-3 bg-[#D4AF37] text-[#0B1325] text-xs font-bold uppercase tracking-wider rounded-xs hover:bg-[#E5C365] transition-colors"
+          onClick={() => onSelectServiceForQuote('manuscript-editing')}
+          className="px-6 py-3 bg-[#D4AF37] text-[#0B1325] text-xs font-bold uppercase tracking-wider rounded-xs hover:bg-[#E5C365] transition-colors cursor-pointer"
         >
-          Request Free Project Assessment
+          Request Project Consultation
         </button>
       </section>
     </div>

@@ -1,196 +1,164 @@
 import { ServiceItem } from '../types';
 
+export const STANDARD_PAYMENT_TERMS = '50% payment before commencement and 50% upon completion / before final delivery.';
+
+export const VALUE_PRICING_MESSAGE = {
+  headline: 'Exceptional Quality. Accessible Pricing.',
+  body: 'At CEC Publishing & Media, we believe professional publishing services should be both excellent and accessible. We deliver high-quality writing, editing, design and publishing support at competitive, affordable rates, with each project quoted according to its specific requirements.',
+  ctaText: 'Request a Quote',
+  ctaSupportingText: 'Tell us about your project and we’ll provide a personalised quotation based on your specific needs.',
+  paymentTerms: STANDARD_PAYMENT_TERMS,
+  pillars: [
+    {
+      title: 'Tailored to Project Scope',
+      description: 'Quotes are calculated precisely from your manuscript page count, editorial depth, and production format.'
+    },
+    {
+      title: 'Competitive & Affordable Rates',
+      description: 'Industry-standard excellence structured to be accessible for authors, ministers, executives, and organizations.'
+    },
+    {
+      title: 'Transparent Milestone Terms',
+      description: 'Standard 50% commencement and 50% upon completion schedule with zero hidden charges.'
+    }
+  ]
+};
+
 export const SERVICES_DATA: ServiceItem[] = [
   {
     id: 'ghostwriting',
     title: 'Ghostwriting',
     category: 'Editorial',
-    shortDesc: 'Help clients turn ideas, experiences, expertise and concepts into professionally written manuscripts.',
-    fullDesc: 'Our ghostwriting service partners experienced collaborative writers with visionary leaders, pastors, professionals, and thought leaders who have profound stories and lessons to share but lack the time or literary technique to write a full book. We preserve your authentic voice while structuring a compelling narrative.',
+    quoteModel: 'Quoted by Project Scope',
+    shortDesc: 'Transform ideas, lived experiences, expertise and concepts into professionally written manuscripts.',
+    fullDesc: 'Our ghostwriting service pairs dedicated collaborative writers with professionals, ministers, leaders, and thinkers who have compelling messages to share but lack the time or literary bandwidth to write a full book. We preserve your authentic voice, worldview, and terminology while structuring an engaging, reader-focused narrative.',
     deliverables: [
-      'In-depth recorded interview sessions & concept discovery',
-      'Detailed chapter-by-chapter book outline & structural arc',
+      'In-depth interview sessions & concept discovery recording',
+      'Detailed chapter-by-chapter book outline & narrative roadmap',
       'Complete manuscript drafts written in your natural tone and voice',
       'Iterative revision rounds based on your editorial feedback',
-      'Final polished, print-ready digital manuscript with complete transfer of copyright'
+      'Final polished digital manuscript with full transfer of copyright ownership'
     ],
-    idealFor: 'Executives, business leaders, coaches, pastors, ministry founders, public figures, and retirees wishing to document their memoirs and expertise.',
+    idealFor: 'Professionals, business executives, pastors, ministry founders, public figures, and retirees documenting their memoirs and expertise.',
     iconName: 'Feather'
   },
   {
     id: 'manuscript-editing',
     title: 'Manuscript Editing',
     category: 'Editorial',
-    shortDesc: 'Structural, developmental and line editing depending on the project’s specific requirements.',
-    fullDesc: 'We evaluate your completed manuscript from macro to micro levels. Our editorial team refines pacing, thematic cohesion, character development, logic flow, clarity, and sentence-level prose while honouring your original authorial vision.',
+    quoteModel: 'Quoted by Project Scope',
+    shortDesc: 'Structural, developmental, and line editing tailored to your manuscript’s specific requirements.',
+    fullDesc: 'We evaluate your draft comprehensively from broad architecture down to sentence-level nuance. Our editorial process refines pacing, thematic flow, clarity, tone consistency, and argument cohesion while honoring your authorial vision.',
     deliverables: [
-      'Comprehensive developmental assessment and structural feedback memo',
-      'Line-by-line editorial refinements for tone, rhythm, and sentence economy',
-      'Pacing, chapter transitions, and argument continuity review',
-      'Tracked changes in Microsoft Word or Google Docs for full transparency',
+      'Comprehensive structural assessment and chapter-by-chapter editorial memo',
+      'Line-by-line refinements for tone, rhythm, clarity, and sentence economy',
+      'Pacing, chapter transitions, and continuity review',
+      'Tracked changes in Microsoft Word or Google Docs for total transparency',
       'One-on-one editorial consultation to review recommended revisions'
     ],
-    idealFor: 'Writers with a completed draft who need professional guidance to sharpen narrative impact and literary rigor.',
+    idealFor: 'Authors with a completed draft who need professional guidance to sharpen literary impact and clarity.',
     iconName: 'FileEdit'
   },
   {
     id: 'proofreading',
     title: 'Proofreading',
     category: 'Editorial',
-    shortDesc: 'Final language, grammar, spelling, punctuation and consistency checks before production.',
-    fullDesc: 'The critical final defense against typographical errors. Once your manuscript has completed structural editing and layout, our proofreaders conduct meticulous scrutiny of grammar, punctuation, spelling variations, syntax, hyphenation, and typesetting quirks.',
+    quoteModel: 'Quoted by Project Scope',
+    shortDesc: 'Final language, grammar, spelling, punctuation and typographical consistency checks before production.',
+    fullDesc: 'The essential final defense against errors. Once your manuscript has undergone editing and formatting, our proofreaders conduct meticulous checks to eliminate typos, spelling variations, grammatical slips, punctuation errors, and typesetting anomalies.',
     deliverables: [
       'Rigorous detection of typographical, spelling, and syntactic errors',
-      'Consistent adherence to standard style guides (Chicago Manual of Style, Oxford)',
       'Verification of names, headings, footnote references, and chapter numbering',
-      'Pre-press final proof check on formatted page proofs (PDF)',
-      'Editorial clean certificate of readiness for publication'
+      'Consistent style and hyphenation checks',
+      'Pre-press final proof check on formatted page proofs',
+      'Clean editorial sign-off for publication readiness'
     ],
-    idealFor: 'Authors with edited manuscripts ready for layout or pre-press verification.',
+    idealFor: 'Authors with completed, edited manuscripts ready for layout or pre-press verification.',
     iconName: 'CheckCircle2'
   },
   {
     id: 'book-formatting',
-    title: 'Book Formatting & Typesetting',
+    title: 'Book Formatting',
     category: 'Design & Production',
-    shortDesc: 'Professional interior formatting for print books and responsive reflowable ebooks.',
-    fullDesc: 'A great book requires an interior that feels effortless to read. We engineer elegant margins, running headers, drop caps, orphan and widow suppression, chapter opening styling, and custom font pairings for physical paperbacks, hardcovers, and digital readers.',
+    quoteModel: 'Quoted by Project Scope',
+    shortDesc: 'Professional interior layout and typesetting for print books and responsive reflowable ebooks.',
+    fullDesc: 'A well-designed interior ensures an effortless, comfortable reading experience. We craft balanced margins, elegant running headers, chapter headings, drop caps, and typographic hierarchies formatted specifically for trade print standards and digital screens.',
     deliverables: [
-      'Industry-standard Adobe InDesign interior typesetting for print',
-      'Custom typographic styling tailored to your genre (headers, folios, callouts)',
-      'Reflowable EPUB and MOBI/KDP-compliant formats for Kindle, Apple Books, and Kobo',
-      'Clean handling of tables, footnotes, poetry, and index sections',
-      'Print-ready PDF formatted precisely to printer trim size specifications'
+      'Professional interior typesetting tailored to genre standards',
+      'Custom chapter opening styling, headers, and pagination',
+      'Print-ready PDF formatted to exact printer trim dimensions',
+      'Reflowable digital formatting compliant with major e-readers',
+      'Clean treatment of tables, callout quotes, and footnotes'
     ],
-    idealFor: 'Self-publishing authors, academic researchers, and institutions preparing books for physical printing and digital distribution.',
+    idealFor: 'Authors preparing manuscripts for physical printing and digital distribution.',
     iconName: 'LayoutTemplate'
   },
   {
     id: 'book-cover-design',
     title: 'Book Cover Design',
     category: 'Design & Production',
-    shortDesc: 'Professional covers designed to communicate the book’s genre, subject and identity.',
-    fullDesc: 'Your cover is your book’s most important marketing tool. We craft custom, genre-aligned cover art for front, spine, and back covers that instantly capture attention on digital bookshelves and physical bookstore displays.',
+    quoteModel: 'Quoted by Project Scope',
+    shortDesc: 'Professional cover designs created to communicate your book’s genre, subject, and unique identity.',
+    fullDesc: 'Your cover is your book’s primary visual presentation. We design custom front, spine, and back cover layouts that reflect your subject matter, command attention on digital platforms, and conform to printer mechanical requirements.',
     deliverables: [
-      'Front cover design optimized for thumbnail readability on online stores',
-      'Full jacket wrap design (front, spine, back) calculated to exact printer paper caliper',
-      'Custom typography, barcode placement, blurb typography, and author bio styling',
-      'High-resolution 300 DPI print-ready CMYK PDFs and RGB digital marketing mockups',
-      'Multiple conceptual directions with revision rounds'
+      'High-impact front cover design optimized for digital thumbnail visibility',
+      'Full jacket wrap (front, spine, back) calculated to exact printer spine width',
+      'Typography, barcode placement, blurb layout, and author bio styling',
+      'High-resolution 300 DPI print-ready CMYK PDFs and RGB digital mockups',
+      'Design direction alignment and revision rounds'
     ],
-    idealFor: 'Any author releasing a new title who requires an industry-standard, bookstore-quality visual identity.',
+    idealFor: 'Any author releasing a new title who requires an industry-standard visual presentation.',
     iconName: 'Palette'
   },
   {
     id: 'ebook-publishing',
     title: 'Ebook Publishing',
     category: 'Publishing & Strategy',
+    quoteModel: 'Quoted by Project Scope',
     shortDesc: 'Preparation and publishing support for global digital distribution platforms.',
-    fullDesc: 'We guide authors through digital publishing, ensuring your ebook is properly validated, meta-tagged, and distributed across major online stores worldwide.',
+    fullDesc: 'We guide authors through digital publishing setup, ensuring your ebook is properly validated, meta-tagged, and published across major international digital platforms.',
     deliverables: [
-      'Strict EPUB validation compliant with IDPF standards',
-      'Metadata optimization (keywords, BISAC categories, search descriptions)',
-      'Account setup guidance for Amazon Kindle Direct Publishing (KDP), Smashwords, and local African platforms',
-      'Digital pricing and royalty strategy consultation',
-      'Step-by-step upload assistance and verification'
+      'Ebook file validation compliant with modern standards',
+      'Metadata configuration (categories, keywords, and book descriptions)',
+      'Account setup guidance for Amazon Kindle Direct Publishing (KDP) and digital platforms',
+      'Pricing and royalty guidance',
+      'Verification of live digital distribution'
     ],
-    idealFor: 'Authors wanting international digital reach without upfront physical inventory costs.',
+    idealFor: 'Authors seeking broad digital reach without physical inventory requirements.',
     iconName: 'Smartphone'
   },
   {
     id: 'print-publishing',
-    title: 'Print Book Publishing',
+    title: 'Print Publishing',
     category: 'Publishing & Strategy',
+    quoteModel: 'Quoted by Specifications',
     shortDesc: 'Support with preparing books for physical production and distribution channels.',
-    fullDesc: 'Physical books carry lasting weight. We help authors prepare, license, and publish print editions through print-on-demand networks (such as Amazon KDP Print and IngramSpark) and local press runs for book launches and conferences.',
+    fullDesc: 'Physical books provide lasting tangibility. We assist authors in preparing and publishing print editions through print-on-demand channels as well as managing local print runs for conferences, book launches, and retail distribution.',
     deliverables: [
-      'Selection of appropriate paperweights, binding styles (paperback vs. case laminate hardcover), and laminations',
-      'Print-on-demand setup enabling global print availability with zero required inventory',
-      'Guidance on printing local author batches for launches in Nigeria',
-      'Proof copy ordering and pre-flight physical print inspection',
-      'Distribution channel enablement across international bookstores'
+      'Guidance on paperweights, trim sizes, and binding styles (paperback / hardcover)',
+      'Print-on-demand setup for international availability',
+      'Assistance with local print runs for Nigerian book launches',
+      'Pre-press file checks to prevent printer misalignments',
+      'Proof copy review and physical production coordination'
     ],
-    idealFor: 'Writers, ministers, speakers, and organizations needing physical copies for distribution and retail.',
+    idealFor: 'Authors, organizations, and speakers who require physical copies for distribution and sale.',
     iconName: 'BookOpen'
   },
   {
-    id: 'book-production',
-    title: 'Book Production Management',
-    category: 'Design & Production',
-    shortDesc: 'End-to-end coordination of editorial, design and physical production requirements.',
-    fullDesc: 'A turnkey project management service. CEC Publishing & Media oversees every moving part of turning raw manuscripts into finished boxed books—supervising editors, proofreaders, typesetters, cover artists, and quality printers.',
-    deliverables: [
-      'Single point of contact project management with clear milestones',
-      'Pre-press prep, digital proof approvals, and color profile calibration',
-      'Liaison with vetted printing houses in Nigeria and abroad',
-      'Quality assurance checks on sample runs and binding durability',
-      'Delivery coordination to your specified location'
-    ],
-    idealFor: 'Clients and busy organizations who want a seamless, hands-off publishing experience executed to elite standards.',
-    iconName: 'PackageCheck'
-  },
-  {
-    id: 'publishing-consultancy',
-    title: 'Publishing Consultancy',
+    id: 'publishing-consultancy-isbn',
+    title: 'Publishing Consultancy & ISBN',
     category: 'Publishing & Strategy',
-    shortDesc: 'Guidance on publishing options, ISBN, platforms, book preparation and strategic decisions.',
-    fullDesc: 'Navigating today’s publishing landscape can be overwhelming. We offer one-on-one strategic advisory sessions to help you make informed decisions about your manuscript, distribution channels, timeline, budget, and marketing approach.',
+    quoteModel: 'Consultation & Advisory',
+    shortDesc: 'Guidance on publishing options, National Library of Nigeria ISBN, barcodes, and strategic planning.',
+    fullDesc: 'Navigating publishing choices requires strategic clarity. We offer consultative advisory on publishing pathways, copyright, legal deposit requirements, and obtaining official ISBNs and barcodes through the National Library of Nigeria.',
     deliverables: [
-      'Objective analysis of traditional vs. self-publishing vs. hybrid models',
-      'Manuscript readiness evaluation and target audience mapping',
-      'Budget planning and resource allocation recommendations',
-      'Book launch roadmap and sales channel guidance',
-      'Actionable written strategic summary following the consultation'
-    ],
-    idealFor: 'Authors at the planning stage who want clarity before committing time and financial resources.',
-    iconName: 'Compass'
-  },
-  {
-    id: 'isbn-publishing-guidance',
-    title: 'ISBN & Publishing Guidance',
-    category: 'Publishing & Strategy',
-    shortDesc: 'Official copyright, legal deposit, barcode generation, and ISBN cataloguing advisory.',
-    fullDesc: 'Ensure your book is legally recognized and commercially tradable. We advise Nigerian and international authors on registering ISBNs through the National Library of Nigeria, obtaining CIP cataloguing data, barcodes, and copyright protection.',
-    deliverables: [
-      'National Library of Nigeria ISBN application guidance',
-      'EAN-13 high-resolution vector barcode generation with price extensions',
+      'Objective advisory on self-publishing, print-on-demand, and custom distribution models',
+      'National Library of Nigeria ISBN registration guidance',
+      'High-resolution vector barcode generation for cover placement',
       'National Library Legal Deposit requirement advisory',
-      'Copyright statement wording and intellectual property best practices',
-      'Cataloguing-in-Publication (CIP) data preparation advice'
+      'Publication timeline planning and budgeting roadmap'
     ],
-    idealFor: 'Every author and organisation publishing a book for commercial sale or archival in Nigeria.',
-    iconName: 'QrCode'
-  },
-  {
-    id: 'digital-content-creation',
-    title: 'Digital Content Creation',
-    category: 'Media & Content',
-    shortDesc: 'Creative written and digital content for individuals, brands and organisations.',
-    fullDesc: 'Beyond books, your message needs compelling digital media. We craft high-impact long-form articles, whitepapers, executive thought leadership essays, newsletters, corporate annual reports, and website copy that reflect the highest editorial standards.',
-    deliverables: [
-      'Corporate profiles, brochures, and commemorative milestone publications',
-      'Executive thought leadership pieces and LinkedIn articles',
-      'Editorial newsletters and brand magazines',
-      'Whitepapers, policy briefs, and research reports',
-      'Copy editing and tone harmonization for web content'
-    ],
-    idealFor: 'Corporations, NGOs, educational institutions, and professionals seeking polished corporate and literary communications.',
-    iconName: 'Sparkles'
-  },
-  {
-    id: 'literary-creative-services',
-    title: 'Literary & Creative Services',
-    category: 'Media & Content',
-    shortDesc: 'Other writing, editing and publishing-related creative projects tailored to custom specifications.',
-    fullDesc: 'Custom literary engagements requiring bespoke attention. From anthologies, poetry chapbooks, speechwriting, and creative manuscript critiques to translation and adaptation management.',
-    deliverables: [
-      'Speechwriting for keynotes, commencement addresses, and book launches',
-      'Anthology coordination and multi-author editorial management',
-      'Poetry collection editing and artistic typesetting',
-      'Manuscript appraisal reports with scoring on key narrative criteria',
-      'Bespoke creative writing workshops and literary mentorship'
-    ],
-    idealFor: 'Creative writers, event speakers, literary collectives, and cultural organizations.',
-    iconName: 'Bookmark'
+    idealFor: 'Authors at the planning stage seeking clear direction before committing financial resources.',
+    iconName: 'Compass'
   }
 ];
